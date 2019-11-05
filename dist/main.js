@@ -22,7 +22,6 @@ const loadPage = async () => {
         if (now - lastUpdate >= 3) {
             tempManager.updateCity(c.name)
         }
-        // c.temperature = parseInt(c.temperature)
     })
     renderer.renderData(tempManager.cityData)
     getBackgroundPhoto()

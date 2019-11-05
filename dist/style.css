@@ -95,4 +95,5 @@ i {
 
 .fa-search {
 	grid-area: s;
+	justify-self: start;
 }
