@@ -3,17 +3,6 @@ const renderer = new Renderer()
 const input = $('#city-input')
 HandlebarsIntl.registerWith(Handlebars);
 
-getBackgroundPhoto = () => {
-    $('.city').each(function() {
-        let temp = parseInt($(this).find('.temp').text())
-        if (temp > 20) {
-            $(this).css('background-image', `url("good-weather.jpg")`)
-        } else {
-            $(this).css('background-image', `url("bad-weather.jpg")`)
-        }
-    })
-}
-
 const loadPage = async () => {
     const now = new Date().getHours()
     await tempManager.getDataFromDB()
@@ -23,8 +12,11 @@ const loadPage = async () => {
             tempManager.updateCity(c.name)
         }
     })
+    if (tempManager.cityData.length > 0) {
+        $("#form").hide()
+    }
     renderer.renderData(tempManager.cityData)
-    getBackgroundPhoto()
+    renderer.renderBackgroundPhoto()
 }
 
 const handleSearch = async () => {
@@ -35,7 +27,7 @@ const handleSearch = async () => {
     if (inDoc || cityName === "") { return }
     await tempManager.getCityData(cityName)
     renderer.renderData(tempManager.cityData)
-    getBackgroundPhoto()
+    renderer.renderBackgroundPhoto()
 }
 
 const save = (cityName) => {
@@ -45,13 +37,13 @@ const save = (cityName) => {
 const remove = (cityName) => {
     tempManager.removeCity(cityName)
     renderer.renderData(tempManager.cityData)
-    getBackgroundPhoto()
+    renderer.renderBackgroundPhoto()
 }
 
 const update = (cityName) => {
     tempManager.updateCity(cityName)
     renderer.renderData(tempManager.cityData)
-    getBackgroundPhoto()
+    renderer.renderBackgroundPhoto()
 }
 
 const toggleSearch = () => {
