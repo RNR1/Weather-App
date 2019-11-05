@@ -7,7 +7,7 @@ const path = require('path')
 const api = require('./server/routes/api')
 
 const server = express()
-mongoose.connect('mongodb://localhost/weather', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/weather', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useFindAndModify: false
@@ -22,4 +22,4 @@ server.use(morgan("common"))
 server.use('/', api)
 
 const port = 3080
-server.listen(port, () => console.log(`Server is running on port ${port}`))
+server.listen(process.env.PORT || port, () => console.log(`Server is running on port ${port}`))

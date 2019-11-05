@@ -5,7 +5,7 @@ const parseString = require('xml2js').parseString
 const moment = require('moment')
 const async = require('async')
 const City = require('../models/City')
-const apiKey = 'e96383a889984517f335db9fb46f0361'
+const apiKey = API_KEY || 'e96383a889984517f335db9fb46f0361'
 
 router.get('/city/:cityName', async (req, res) => {
 	const cityName = req.params.cityName
