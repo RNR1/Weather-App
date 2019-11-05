@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Heebo&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.css">
     <link rel="stylesheet" href="style.css">
     <title>Weather App</title>
 </head>
@@ -27,7 +27,7 @@
             <h3>{{name}}</h3>
             <p class="temp">{{temperature}}°<p>
             <p class="condition">{{condition}}</p>
-            <img src="http://openweathermap.org/img/wn/{{conditionPic}}.png"></img>
+            <img src="http://openweathermap.org/img/wn/{{conditionPic}}.png">
             <p class="time">Updated: {{formatRelative updatedAt}}</p>
             <i class="fas fa-plus" onclick="save(`{{name}}`)"></i>
             <i class="far fa-trash-alt" onclick="remove(`{{name}}`)"></i>
