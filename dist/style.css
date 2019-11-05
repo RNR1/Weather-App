@@ -1,0 +1,98 @@
+body {
+	background-color: #041f33;
+	margin: 0;
+	font-family: 'Heebo', sans-serif;
+	color: #fad17f;
+}
+
+i {
+	color: #f6b93b;
+}
+
+#container {
+	display: grid;
+	width: 100%;
+	grid-template-areas: 'f' 'c' 'p';
+}
+
+#form {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-areas: '. i i s';
+	justify-items: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#form > #city-input {
+	text-align: center;
+	grid-area: i;
+}
+
+#cities {
+	grid-area: c;
+	display: grid;
+	width: 100%;
+	justify-items: center;
+	align-items: center;
+}
+
+.city {
+	display: grid;
+	width: 100%;
+	height: 80px;
+	background-size: cover;
+	background-position: center;
+	grid-template-columns: 2fr repeat(4, 1fr) 10%;
+	grid-template-rows: 15% 15% repeat(2, 1fr);
+	align-items: center;
+	justify-items: center;
+	text-align: center;
+	grid-template-areas: 'time time . . . refresh' 'time time . . . refresh' 'n i c c t plus' 'n i c c t trash';
+}
+
+.city > h3 {
+	grid-area: n;
+	font-size: 1.25em;
+}
+
+.city > .temp {
+	grid-area: t;
+	font-size: 28px;
+}
+
+.city > img {
+	grid-area: i;
+}
+
+.city > .condition {
+	grid-area: c;
+}
+
+.city > .time {
+	grid-area: time;
+	font-size: 10px;
+	align-self: baseline;
+}
+
+.city > .fa-sync {
+	grid-area: refresh;
+}
+
+.city > .fa-plus {
+	grid-area: plus;
+}
+
+.city > .fa-trash-alt {
+	grid-area: trash;
+}
+
+.fa-plus-circle {
+	grid-area: p;
+	margin: 20px;
+	justify-self: end;
+}
+
+.fa-search {
+	grid-area: s;
+}
