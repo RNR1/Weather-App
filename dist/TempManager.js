@@ -5,12 +5,25 @@ class TempManager {
 
 	async getDataFromDB() {
 		const data = await $.get('/cities')
+		if(!data) {
+			console.error(data)
+			return
+		}
 		this.cityData = data
 	}
 
 	async getCityData(cityName) {
-		const data = await $.get(`/city/${cityName}`)
-        this.cityData.push({...data})
+		let data
+		let alreadyExists = this.cityData.find(c => c.name === cityName)
+		if (alreadyExists) { return }
+		try { 
+			data = await $.get(`/city/${cityName}`)
+			if (data.error) {
+				throw new Error("city not found")
+			}
+		}
+		catch(err) { return }
+		this.cityData.push({...data})
 	}
 
 	async updateCity(cityName) {
@@ -38,5 +51,13 @@ class TempManager {
 			success: () => console.log(`${cityName} removed from DB`),
 			error: () => console.log(`${cityName} does not exist in database`)
 		})
+	}
+
+	capitalizeCity(cityName) {
+		let words = cityName
+			.split(" ")
+			.map(w => w = w[0].toUpperCase() + w.substring(1).toLowerCase())
+			.join(" ")
+		return words
 	}
 }

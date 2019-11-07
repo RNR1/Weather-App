@@ -23,9 +23,10 @@ const handleSearch = async () => {
     
     let cityName = input.val()
     input.val("")
-    let inDoc = tempManager.cityData.find(c => c.name === cityName)
-    if (inDoc || cityName === "") { return }
-    await tempManager.getCityData(cityName)
+    cityName = tempManager.capitalizeCity(cityName)
+    if (cityName === "") { return }
+    try { await tempManager.getCityData(cityName) }
+    catch(err) { return }
     renderer.renderData(tempManager.cityData)
     renderer.renderBackgroundPhoto()
 }

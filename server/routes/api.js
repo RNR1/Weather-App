@@ -8,10 +8,15 @@ const City = require('../models/City')
 const apiKey = 'e96383a889984517f335db9fb46f0361'
 
 router.get('/city/:cityName', async (req, res) => {
+	let cityData
 	const cityName = req.params.cityName
 	const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&mode=xml&appid=${apiKey}`
-	let cityData = await requestPromise(url)
-    parseString(cityData, (err, result) => {
+	try {
+		cityData = await requestPromise(url)
+	} catch (err) {
+		return res.send(err)
+	}
+	parseString(cityData, (err, result) => {
 		data = result.current
 		cityData = {
 			name: data.city[0].$.name,
@@ -40,14 +45,14 @@ router.get('/cities', async (req, res) => {
 })
 
 router.post('/city', async (req, res) => {
-    let city = req.body
+	let city = req.body
 	City.find({ name: city.name }, async (err, inDb) => {
-        if (inDb.length === 0) {
-            city = new City({ ...city })
+		if (inDb.length === 0) {
+			city = new City({ ...city })
 			city = await city.save()
-            res.send('OK')
+			res.send('OK')
 		} else {
-            res.end()
+			res.end()
 		}
 	})
 })
@@ -65,17 +70,16 @@ router.put('/city/:cityName', async (req, res) => {
 			condition: data.weather[0].$.value,
 			conditionPic: data.weather[0].$.icon,
 			updatedAt: moment(data.lastupdate[0].$.value).format('LLLL')
-        }
-        if (inDb) {
-            await City.findOneAndUpdate(
-                { name: cityName },
-                { $set: { ...cityData } },
-                { new: true }
-            )
-        }
-        res.send(cityData)
-    })
-    
+		}
+		if (inDb) {
+			await City.findOneAndUpdate(
+				{ name: cityName },
+				{ $set: { ...cityData } },
+				{ new: true }
+			)
+		}
+		res.send(cityData)
+	})
 })
 
 router.delete('/city/:cityName', async (req, res) => {
