@@ -47,17 +47,14 @@ class TempManager {
 		$.ajax({
 			method: 'DELETE',
 			url: `/city/${cityName}`,
-			type: 'json',
-			success: () => console.log(`${cityName} removed from DB`),
-			error: () => console.log(`${cityName} does not exist in database`)
+			type: 'json'
 		})
 	}
 
 	capitalizeCity(cityName) {
-		let words = cityName
-			.split(" ")
-			.map(w => w = w[0].toUpperCase() + w.substring(1).toLowerCase())
-			.join(" ")
-		return words
+		return cityName
+		.split(" ")
+		.map(w => w = w[0].toUpperCase() + w.substring(1).toLowerCase())
+		.join(" ")
 	}
 }

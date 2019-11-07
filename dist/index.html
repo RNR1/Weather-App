@@ -19,24 +19,22 @@
         </div>
         <div id="cities"></div>
         <i class="fas fa-plus-circle" onclick="toggleSearch()"></i>
+        <footer>&copy info provided by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap<a></footer>
     </div>
-    <footer>&copy powered by <a href="https://openweathermap.org/" target="_blank">OpenWeatherMap<a></footer>
 
     <script id="cities-template" type="text/x-handlebars-template">
         {{#each allCityData}}
-        <div class="city">
-            
+        <div class="city">           
             <h3>{{name}}</h3>
             <p class="temp">{{temperature}}°<p>
-            <p class="condition">{{condition}}</p>
+            <p class="condition">{{capitalizeFirst condition}}</p>
             <img src="//openweathermap.org/img/wn/{{conditionPic}}.png">
             <p class="time">Updated: {{formatRelative updatedAt}}</p>
+            
             <i class="fas fa-plus" onclick="save(`{{name}}`)"></i>
             <i class="far fa-trash-alt" onclick="remove(`{{name}}`)"></i>
             <i class="fas fa-sync" onclick="update(`{{name}}`)"></i>
-        </div>
-        {{/each}}
-        </script>
+        </div>{{/each}}</script>
 
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/handlebars/dist/handlebars.js"></script>
