@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
     "async": "^3.1.0",
     "express": "^4.17.1",
-    "@fortawesome/fontawesome-free": "^5.11.2",
-    "handlebars": "^4.5.1",
+    "handlebars": "^4.7.6",
     "handlebars-intl": "^1.1.2",
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
